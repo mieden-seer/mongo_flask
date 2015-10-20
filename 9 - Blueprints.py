@@ -1,6 +1,7 @@
 from flask import request, render_template
 from flask import session
 from flask import redirect
+from functools import wraps
 import logging
 # from flask import url_for 
 
@@ -18,6 +19,7 @@ app.logger.addHandler(fh)
 app.secret_key = 'This is an unspeakable secret.'
 
 def login_required(func):
+    @wraps(func)
     def wrapper(*args, **kwargs):
         if 'username' in session:
             return func(*args, **kwargs)
@@ -49,10 +51,12 @@ def welcome_user(username):
     return 'Welcome ' + username + '!'
 
 @app.route('/with_int/<int:number>')
+@login_required
 def show_number(number):
     return 'We\'re counting with number '+ str(number) +'!'
 
 @app.route('/methods', methods=['GET', 'POST'])
+@login_required
 def methods():
     if request.method == 'POST':
         return 'In here via POST request.'

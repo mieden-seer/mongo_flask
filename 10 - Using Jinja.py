@@ -1,12 +1,8 @@
-"""
-Example 1. This demonstrates a barebones Flask application
-"""
-
 import logging
 from flask import render_template
 from app import app
 
-app.secret_key = "This is a secret"
+app.secret_key = "This is an unspeakable secret."
 app.config.from_object('config.Config')
 
 
