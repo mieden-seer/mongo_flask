@@ -80,4 +80,4 @@ def application_error(e):
 if __name__ == "__main__":
     # with app.test_request_context():
     #     print url_for('welcome_user', username='Sarah Connor')
-    app.run(debug=True)
+    app.run(debug=True, port=5000, host="0.0.0.0")

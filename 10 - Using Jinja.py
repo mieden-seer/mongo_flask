@@ -5,14 +5,12 @@ from app import app
 app.secret_key = "This is an unspeakable secret."
 app.config.from_object('config.Config')
 
-
 # Setup Logging
 formatter = logging.Formatter(app.config.get('LOG_FORMAT'))
 fh = logging.FileHandler(filename=app.config.get('LOG_FILE'))
 fh.setFormatter(formatter)
 fh.setLevel(logging.DEBUG)
 app.logger.addHandler(fh)
-
 
 @app.errorhandler(404)
 def page_not_found(e):

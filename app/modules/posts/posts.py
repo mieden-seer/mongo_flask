@@ -11,7 +11,7 @@ mod = Blueprint('posts', __name__)
 @mod.route('/')
 def post_list():
     posts = g.postsdb.getPosts()
-    return render_template('posts/post.html', posts=posts)
+    return render_template('posts/post.html', posts=posts, date='October 20 2015')
 
 @mod.route('/', methods=['POST'])
 def create_post():

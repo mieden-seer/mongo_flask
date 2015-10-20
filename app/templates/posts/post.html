@@ -5,13 +5,15 @@
 
 <table class="table">
     <tr>
-        <th>Post List</th>
+        <th>Post List for {{ date }}</th>
     </tr>
 
     {% for post in posts %}
     <tr>
         <td>
-            {{post['post']}}
+            {{
+                post['post']
+            }}
         </td>
     </tr>
     {% endfor %}
