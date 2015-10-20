@@ -1,4 +1,6 @@
 from flask import request, render_template
+from flask import session
+from flask import redirect
 import logging
 # from flask import url_for 
 
@@ -13,11 +15,36 @@ fh.setFormatter(formatter)
 fh.setLevel(logging.DEBUG)
 app.logger.addHandler(fh)
 
+app.secret_key = 'This is an unspeakable secret.'
+
+def login_required(func):
+    def wrapper(*args, **kwargs):
+        if 'username' in session:
+            return func(*args, **kwargs)
+        else:
+            return redirect('error')
+    return wrapper
+
+@app.route("/login", methods=['POST'])
+def login():
+    session['username'] = 'Ali'
+    return 'User is now logged in.'
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect('/')
+
+@app.route('/error')
+def error():
+    return 'User is not logged in!'
+
 @app.route("/")
 def Welcome():
     return 'Welcome!'
 
 @app.route("/<username>")
+@login_required
 def welcome_user(username):
     return 'Welcome ' + username + '!'
 

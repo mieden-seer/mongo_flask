@@ -2,14 +2,17 @@ from datetime import datetime
 import random
 from flask import Blueprint
 
-mod_two = Blueprint('math_two', __name__)
+mod_two = Blueprint('ali', __name__)
 
 def int_checker(func):
     def wrapper(*args, **kwargs):
-        if isinstance(kwargs['num_max'], int):
+        try:
+            int(kwargs['num_max'])
             return func(kwargs['num_max'])
-        else:
+        except Exception:
             return 'Invalid Input!'
+        finally:
+            pass        
     return wrapper
 
 

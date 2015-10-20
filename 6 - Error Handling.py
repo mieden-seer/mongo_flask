@@ -1,5 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 # from flask import url_for 
+# import json
 
 app = Flask(__name__,)
 
@@ -17,10 +18,14 @@ def show_number(number):
 
 @app.route('/methods', methods=['GET', 'POST'])
 def methods():
+    participants = [{"name":"Ali", "age":20},
+                    {"name":"Ruth", "age":24},
+                    {"name":"Andrew", "age":22},
+                    {"name":"Pat", "age":25}]
     if request.method == 'POST':
         return 'In here via POST request.'
     else:
-        return 'In here via GET request.'
+        return jsonify(participants=participants)
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -39,6 +39,7 @@ def log_sample():
 
 @app.errorhandler(404)
 def page_not_found(e):
+    app.logger.info(str(e))
     return render_template('404.html'), 404
 
 

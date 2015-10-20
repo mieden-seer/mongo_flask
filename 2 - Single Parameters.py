@@ -6,7 +6,7 @@ app = Flask(__name__,)
 def Welcome():
     return 'Welcome!'
 
-@app.route("/<username>")
+@app.route("/users/<username>")
 def welcome_user(username):
     return 'Welcome ' + username + '!'
 

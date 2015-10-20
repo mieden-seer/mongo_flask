@@ -15,11 +15,12 @@ def welcome_user(username):
 def show_number(number):
     return 'We\'re counting with number '+ str(number) +'!'
 
-@app.route('/methods', methods=['GET', 'POST'])
-def methods():
-    if request.method == 'POST':
-        return 'In here via POST request.'
-    else:
+@app.route('/methods', methods=['POST'])
+def post_method():
+    return 'In here via POST request.'
+
+@app.route('/methods', methods=['GET'])
+def get_method():
         return 'In here via GET request.'
 
 if __name__ == "__main__":
