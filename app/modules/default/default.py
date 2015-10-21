@@ -2,6 +2,10 @@ from datetime import datetime
 from flask import Blueprint
 from flask import render_template
 from flask import redirect
+from flask import request
+from flask import g
+from flask import url_for
+from flask import flash
 
 mod = Blueprint('default', __name__)
 
@@ -16,4 +20,5 @@ def login_page():
 
 @mod.route('/login', methods=['POST'])
 def login_submit():
-    return redirect('/')
+	g.usersdb.getUser(request.form['username'], request.form['password'])
+	return redirect('/posts/')
